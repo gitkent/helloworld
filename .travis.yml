@@ -9,17 +9,9 @@ jobs:
   include:
     - stage: test
       script: npm test
-    - stage: build and publish docker image
+    - stage: build and publish
       script: bash docker_push
-      on:
-        branch: master
+      if: branch = master
     - stage: test docker image
-      script: docker run -rm "$DOCKER_USER"/"$DOCKER_REPO" cat hello.txt
-      on:
-        branch: master
-after_install:
-  - npm stop
-stages:
-  - test
-  - build
-  - publish
+      script: docker run --rm "$DOCKER_USER"/"$DOCKER_REPO" node -v
+      if: branch = master
