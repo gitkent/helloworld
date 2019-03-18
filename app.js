@@ -26,5 +26,13 @@ app.get('/status', function (req, res, next) {
   return res.json(o);
 });
 
-module.exports = app;
-//app.listen(port, () => console.log(`Example app listening on port ${port}!`))
+//module.exports = app;
+const server = app.listen(port, () => console.log(`Example app listening on port ${port}!`))
+
+process.on('SIGTERM', () => {
+  console.info('SIGTERM signal received.');
+  console.log('Closing http server.');
+  server.close(() => {
+    console.log('Http server closed.');
+  });
+});
