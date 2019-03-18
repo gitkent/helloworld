@@ -26,7 +26,7 @@ app.get('/status', function (req, res, next) {
   return res.json(o);
 });
 
-//module.exports = app;
+module.exports = app;
 const server = app.listen(port, () => console.log(`Example app listening on port ${port}!`))
 
 process.on('SIGTERM', () => {

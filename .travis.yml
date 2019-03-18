@@ -1,13 +1,23 @@
 language: node_js
 node_js:
   - "stable"
+service:
+  - docker
 before_install:
   - npm install mocha
-script: npm test
-services:
-  - docker
-deploy:
-  provider: script
-  script: bash docker_push
-  on:
-    branch: master
+jobs:
+  include:
+    - stage: test
+      script: npm test
+    - stage: build
+      script: docker build -t "$DOCKER_USER"/"$DOCKER_REPO" .
+      if: branch = master
+    - stage: publish
+      script: bash docker_push
+      if: branch = master
+after_install:
+  - npm stop
+stages:
+  - test
+  - build
+  - publish
