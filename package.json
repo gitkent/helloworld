@@ -1,0 +1,29 @@
+{
+  "name": "helloworld",
+  "version": "1.0.0",
+  "description": "nodejs hello world",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js",
+    "test": "mocha 'test/test.js'"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gitkent/helloworld.git"
+  },
+  "keywords": [
+    "node"
+  ],
+  "author": "gitkent",
+  "license": "UNLICENSED",
+  "bugs": {
+    "url": "https://github.com/gitkent/helloworld/issues"
+  },
+  "homepage": "https://github.com/gitkent/helloworld#readme",
+  "dependencies": {
+    "express": "^4.16.4"
+  },
+  "devDependencies": {
+    "supertest": "^4.0.2"
+  }
+}
