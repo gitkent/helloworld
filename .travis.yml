@@ -5,23 +5,9 @@ service:
   - docker
 before_install:
   - npm install mocha
-jobs:
-  include:
-    - stage: test
-      script: npm test
-    - stage: build
-      script: bash docker_push preview
-      if: branch = master
-    - stage: test_image
-      script: docker run --rm $DOCKER_USER/$DOCKER_REPO:preview node -v
-    - stage: publish
-      script: bash docker_push latest
-      if: branch = master
-stages:
-  - test
-  - name: build
-    if: branch = master
-  - name: test_image
-    if: branch = master
-  - name: publish
-    if: branch = master
+script: npm test
+deploy:
+  provider: script
+  script: bash docker_push
+  on:
+    branch: master
