@@ -5,7 +5,8 @@
   "main": "app.js",
   "scripts": {
     "start": "node app.js",
-    "test": "mocha 'test/test.js'"
+    "stop": "killall node",
+    "test": "mocha 'test/test.js' --exit"
   },
   "repository": {
     "type": "git",
