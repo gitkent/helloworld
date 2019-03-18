@@ -9,12 +9,14 @@ jobs:
   include:
     - stage: test
       script: npm test
-    - stage: build
-      script: docker build -t "$DOCKER_USER"/"$DOCKER_REPO" .
-      if: branch = master
-    - stage: publish
+    - stage: build and publish docker image
       script: bash docker_push
-      if: branch = master
+      on:
+        branch: master
+    - stage: test docker image
+      script: docker run -rm "$DOCKER_USER"/"$DOCKER_REPO" cat hello.txt
+      on:
+        branch: master
 after_install:
   - npm stop
 stages:
