@@ -6,7 +6,7 @@
   "scripts": {
     "start": "node app.js",
     "stop": "killall node",
-    "test": "mocha 'test/test.js'"
+    "test": "mocha 'test/test.js' --exit"
   },
   "repository": {
     "type": "git",
