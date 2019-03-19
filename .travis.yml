@@ -28,8 +28,8 @@ jobs:
 stages:
   - test
   - name: build_preview
-    if: (NOT type IN (pull_request)) AND (branch = master)
+    if: (type IN (pull_request)) AND (branch = master)
   - name: test_preview
-    if: (NOT type IN (pull_request)) AND (branch = master)
+    if: (type IN (pull_request)) AND (branch = master)
   - name: publish
     if: (NOT type IN (pull_request)) AND (branch = master)
