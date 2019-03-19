@@ -3,11 +3,33 @@ node_js:
   - "stable"
 service:
   - docker
-before_install:
-  - npm install mocha
-script: npm test
-deploy:
-  provider: script
-  script: bash docker_push
-  on:
-    branch: master
+jobs:
+  include:
+    - stage: test
+      before_install:
+        - npm install mocha
+      script: npm test
+    - stage: build_preview
+      script: skip
+      deploy:
+        provider: script
+        script: bash docker_push preview
+      on:
+        branch: master
+    - stage: test_preview
+      script: docker run --rm $DOCKER_USER/$DOCKER_REPO:preview cat hello.txt
+    - stage: publish
+      script: skip
+      deploy:
+        provider: script
+        script: bash docker_push latest
+      on:
+        branch: master
+stages:
+  - test
+  - name: build_preview
+    if: (NOT type IN (pull_request)) AND (branch = master)
+  - name: test_preview
+    if: (NOT type IN (pull_request)) AND (branch = master)
+  - name: publish
+    if: (NOT type IN (pull_request)) AND (branch = master)
