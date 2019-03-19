@@ -15,7 +15,7 @@ jobs:
         provider: script
         script: bash docker_push preview
     - stage: test_preview
-      script: docker run --rm $DOCKER_USER/$DOCKER_REPO:preview cat hello.txt
+      script: docker run --rm $DOCKER_USER/$DOCKER_REPO:preview node -v
     - stage: publish
       script: skip
       deploy:
