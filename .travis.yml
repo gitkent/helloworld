@@ -14,22 +14,18 @@ jobs:
       deploy:
         provider: script
         script: bash docker_push preview
-      on:
-        branch: master
     - stage: test_preview
-      script: docker run --rm $DOCKER_USER/$DOCKER_REPO:preview cat hello.txt
+      script: docker run --rm $DOCKER_USER/$DOCKER_REPO:preview node -v
     - stage: publish
       script: skip
       deploy:
         provider: script
         script: bash docker_push latest
-      on:
-        branch: master
 stages:
   - test
   - name: build_preview
-    if: (NOT type IN (pull_request)) AND (branch = master)
+    if: branch = master
   - name: test_preview
-    if: (NOT type IN (pull_request)) AND (branch = master)
+    if: branch = master
   - name: publish
     if: (NOT type IN (pull_request)) AND (branch = master)
