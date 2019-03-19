@@ -10,18 +10,21 @@ jobs:
         - npm install mocha
       script: npm test
     - stage: build_preview
+      script: skip
       deploy:
         provider: script
         script: bash docker_push preview
       on:
         branch: master
     - stage: test_preview
+      script: skip
       deploy:
         provider: script
         script: docker run --rm $DOCKER_USER/$DOCKER_REPO cat hello.txt
       on:
         branch: master
     - stage: publish
+      script: skip
       deploy:
         provider: script
         script: bash docker_push latest
