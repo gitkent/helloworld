@@ -17,7 +17,7 @@ jobs:
       on:
         branch: master
     - stage: test_preview
-      script: docker run --rm $DOCKER_USER/$DOCKER_REPO cat hello.txt
+      script: docker run --rm $DOCKER_USER/$DOCKER_REPO:preview cat hello.txt
     - stage: publish
       script: skip
       deploy:
