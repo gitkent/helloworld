@@ -27,7 +27,7 @@
   npm install
   ```
 3. Start the app
-	```
+  ```
   node app
   ```
 4. On your browser, go to:
