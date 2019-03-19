@@ -11,3 +11,30 @@ deploy:
   script: bash docker_push
   on:
     branch: master
+jobs:
+  include:
+    - stage: test
+      script: npm test
+    - stage: build_preview
+      deploy:
+        provider: script
+        script: bash docker_push preview
+      on:
+        branch: master
+    - stage: test_preview
+      deploy:
+        provider: script
+        script: docker run --rm $DOCKER_USER/$DOCKER_REPO cat hello.txt
+      on:
+        branch: master
+    - stage: publish
+      deploy:
+        provider: script
+        script: bash docker_push latest
+      on:
+        branch: master
+stages:
+  - test
+  - build_preview
+  - test_preview
+  - publish

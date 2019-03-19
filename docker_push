@@ -1,5 +1,6 @@
 #!/bin/bash
 docker build -t "$DOCKER_USER"/"$DOCKER_REPO" . && \
+  docker tag "$DOCKER_USER"/"$DOCKER_REPO" "$DOCKER_USER"/"$DOCKER_REPO":$1
   docker images && \
   echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin && \
-  docker push "$DOCKER_USER"/"$DOCKER_REPO"
+  docker push "$DOCKER_USER"/"$DOCKER_REPO":$1
