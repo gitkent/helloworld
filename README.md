@@ -1,4 +1,5 @@
 # helloworld
+[![Build Status](https://travis-ci.com/gitkent/helloworld.svg?branch=master)](https://travis-ci.com/gitkent/helloworld)
 ## Start up
 ### Docker way
 1. install Docker on your OS flavor
